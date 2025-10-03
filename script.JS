@@ -42,6 +42,22 @@ function setBackground(images) {
     document.getElementById("description").textContent = images[index].getDescription();
 }
 
+function nextImage() {
+    let currentSrc = document.getElementById("slide").src;
+    let currentIndex = slides.findIndex(image => currentSrc.includes(image.getURL()));
+    let nextIndex = (currentIndex + 1) % slides.length;
+    document.getElementById("slide").src = slides[nextIndex].getURL();
+    document.getElementById("slide").setAttribute("alt", slides[nextIndex].getAttributeValue());
+    document.getElementById("slide-description").textContent = slides[nextIndex].getDescription();
+}
+
+function randomImage() {
+    let randomIndex = Math.floor(Math.random() * (slides.length));
+    document.getElementById("slide").src = slides[randomIndex].getURL();
+    document.getElementById("slide").setAttribute("alt", slides[randomIndex].getAttributeValue());
+    document.getElementById("slide-description").textContent = slides[randomIndex].getDescription();
+}
+
 function setSlideShow(slides) {
     document.getElementById("slide").src = slides[0].getURL();
     document.getElementById("slide").setAttribute("alt", slides[0].getAttributeValue());
@@ -50,14 +66,12 @@ function setSlideShow(slides) {
 
 
 document.getElementById("next-image").addEventListener("click", function() {
-    let currentSrc = document.getElementById("slide").src;
-    let currentIndex = slides.findIndex(image => currentSrc.includes(image.getURL()));
-    let nextIndex = (currentIndex + 1) % slides.length;
-    document.getElementById("slide").src = slides[nextIndex].getURL();
-    document.getElementById("slide").setAttribute("alt", slides[nextIndex].getAttributeValue());
-    document.getElementById("slide-description").textContent = slides[nextIndex].getDescription();
+    nextImage();
 });
 
+document.getElementById("random-image").addEventListener("click", function(){
+    randomImage();
+});
 
 window.onload = function() {
     setBackground(images);

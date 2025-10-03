@@ -40,6 +40,8 @@ function setBackground(images) {
     document.getElementById("beach").src = images[index].getURL();
     document.getElementById("beach").setAttribute("alt", images[index].getAttributeValue());
     document.getElementById("description").textContent = images[index].getDescription();
+    document.getElementById("time").textContent = new Date().toLocaleTimeString();
+    document.getElementById("date").textContent = new Date().toLocaleDateString();
 }
 
 function nextImage() {

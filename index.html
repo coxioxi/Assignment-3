@@ -4,24 +4,27 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>My App</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="style.css">
     <script src="script.JS" defer></script>
 </head>
 <body>
     <section>
-        <div>
-            <p class="description"> This is a simple web application.</p>
+        <img id="beach">
+
+        <div class="info">
+            <p id="description"></p>
         </div>
     </section>
 
-    <section>
+    <section class="slideshow">
         <div>
-            <img id="beach">
+            <img id="slide" alt="Slideshow Image" height="400px" width="600px">
         </div>
-        <container>
-            <button id="next-image">Next Image</button>
+        <div id="buttons">
+            <p id="slide-description"></p>
             <button id="random-image">Random Image</button>
-        </container>
+            <button id="next-image">Next Image</button>
+        </div>
     </section>
 </body>
 </html>

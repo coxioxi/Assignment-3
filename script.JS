@@ -17,24 +17,31 @@ function Image(url, alt, description) {
 }
 
 let morning = new Image("morning.jpg", "Morning", "A beautiful morning view with the sun rising over the mountains.");
+let morning1 = new Image("morning1.jpg", "Morning1", "A serene morning scene with soft sunlight.");
 let noon = new Image("noon.jpg", "Noon", "A bright noon scene with the sun high in the sky and clear blue skies.");
+let noon1 = new Image("noon1.jpg", "Noon1", "A vibrant noon view with lush greenery under the midday sun.");
 let evening = new Image("evening.jpg", "Evening", "A serene evening with the sun setting and casting a golden glow over the landscape.");
 let night = new Image("night.jpeg", "Night", "A tranquil night scene with a starry sky and the moon shining brightly.");
-let images = [morning, noon, evening, night];
-let slides = [morning, noon, evening, night];
+
+let images = [morning1 ,morning, noon, noon1, evening, night];
+let slides = [morning, morning1, noon, noon1, evening, night];
 
 function setBackground(images) {
     let currentHour = new Date().getHours();
     let index;
 
-    if (currentHour >= 5 && currentHour < 12) {
-        index = 0; // Morning
-    } else if (currentHour >= 12 && currentHour < 17) {
-        index = 1; // Noon
+    if (currentHour >= 5 && currentHour < 9) {
+        index = 0; // Morning1
+    } else if (currentHour >= 9 && currentHour < 12) {
+        index = 1; // Morning
+    } else if (currentHour >= 12 && currentHour < 14) {
+        index = 2; // Noon
+    } else if (currentHour >= 14 && currentHour < 17) {
+        index = 3; // Noon1
     } else if (currentHour >= 17 && currentHour < 20) {
-        index = 2; // Evening
+        index = 4; // Evening
     } else {
-        index = 3; // Night
+        index = 5; // Night
     }
 
     document.getElementById("beach").src = images[index].getURL();
@@ -66,17 +73,19 @@ function setSlideShow(slides) {
     document.getElementById("slide-description").textContent = slides[0].getDescription();
 }
 
-
-document.getElementById("next-image").addEventListener("click", function() {
-    nextImage();
+document.getElementById("next-image").addEventListener("click", ()=> {
+    nextImage(); 
 });
 
-document.getElementById("random-image").addEventListener("click", function(){
+document.getElementById("random-image").addEventListener("click", ()=> {
     randomImage();
 });
 
 window.onload = function() {
-    setBackground(images);
+    setInterval(() => {
+        setBackground(images);
+    }, 1000);
+
     setSlideShow(slides);
 }
 

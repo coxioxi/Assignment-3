@@ -16,15 +16,15 @@ function Image(url, alt, description) {
     }
 }
 
-let morning = new Image("morning.jpg", "Morning", "A beautiful morning view with the sun rising over the mountains.");
-let morning1 = new Image("morning1.jpg", "Morning1", "A serene morning scene with soft sunlight.");
-let noon = new Image("noon.jpg", "Noon", "A bright noon scene with the sun high in the sky and clear blue skies.");
-let noon1 = new Image("noon1.jpg", "Noon1", "A vibrant noon view with lush greenery under the midday sun.");
-let evening = new Image("evening.jpg", "Evening", "A serene evening with the sun setting and casting a golden glow over the landscape.");
-let night = new Image("night.jpeg", "Night", "A tranquil night scene with a starry sky and the moon shining brightly.");
+let morning = new Image("images/morning.jpg", "Morning", "A breathtaking morning in Rio de Janeiro, with sunlight glistening over Sugarloaf Mountain and the calm waters of Guanabara Bay.");
+let morning1 = new Image("images/morning1.jpg", "Morning1", "A beautiful morning view with the sun rising over the horizon.");
+let noon = new Image("images/noon.jpg", "Noon", "A bright noon scene with the sun high in the sky and clear blue skies.");
+let evening = new Image("images/evening.jpg", "Evening", "A serene evening with the sun setting and casting a golden glow over the landscape.");
+let evening1 = new Image("images/evening1.jpg", "Evening1", "A breathtaking evening sky glowing with shades of pink, casting a warm and serene light over the landscape.");
+let night = new Image("images/night.jpeg", "Night", "A tranquil night scene with the moon shining brightly.");
 
-let images = [morning1 ,morning, noon, noon1, evening, night];
-let slides = [morning, morning1, noon, noon1, evening, night];
+let images = [morning1 ,morning, noon, evening1, evening, night];
+let slides = [morning, morning1, noon, evening1, evening, night];
 
 function setBackground(images) {
     let currentHour = new Date().getHours();
@@ -38,7 +38,7 @@ function setBackground(images) {
         index = 2; // Noon
     } else if (currentHour >= 14 && currentHour < 17) {
         index = 3; // Noon1
-    } else if (currentHour >= 17 && currentHour < 20) {
+    } else if (currentHour >= 17 && currentHour < 19) {
         index = 4; // Evening
     } else {
         index = 5; // Night
@@ -60,11 +60,19 @@ function nextImage() {
     document.getElementById("slide-description").textContent = slides[nextIndex].getDescription();
 }
 
+let previousIndex = -1;
 function randomImage() {
     let randomIndex = Math.floor(Math.random() * (slides.length));
+    
+    while (randomIndex === previousIndex || randomIndex === 0) {
+        randomIndex = Math.floor(Math.random() * (slides.length));
+    }
+
     document.getElementById("slide").src = slides[randomIndex].getURL();
     document.getElementById("slide").setAttribute("alt", slides[randomIndex].getAttributeValue());
     document.getElementById("slide-description").textContent = slides[randomIndex].getDescription();
+    
+    previousIndex = randomIndex;
 }
 
 function setSlideShow(slides) {
